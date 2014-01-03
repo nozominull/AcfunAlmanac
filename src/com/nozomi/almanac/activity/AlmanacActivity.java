@@ -105,8 +105,6 @@ public class AlmanacActivity extends Activity {
 			int n = (int) (sg * 0.01 * list.size());
 			ListItem a = list.get(n);
 			int m = (int) (rnd(seed, (3 + i)) % 100 * 0.01 * avatars.size());
-			// System.out.println(avatars.get(m) + ".gif " + a.getName() + " "
-			// + a.getGood());
 			goodTableItemArray.add(new TableItem(avatars.get(m), a.getName(), a
 					.getGood()));
 			list.remove(n);
@@ -182,8 +180,8 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(AlmanacActivity.this, "今日运势指数：" + n + "%", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(AlmanacActivity.this, "今日运势指数：" + n + "%",
+						Toast.LENGTH_SHORT).show();
 
 			}
 		});

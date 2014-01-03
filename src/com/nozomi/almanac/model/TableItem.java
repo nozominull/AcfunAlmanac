@@ -2,12 +2,10 @@ package com.nozomi.almanac.model;
 
 public class TableItem {
 
-
-
 	private int c;
 	private String a;
 	private String b;
-	
+
 	public TableItem(int c, String a, String b) {
 		this.c = c;
 		this.a = a;

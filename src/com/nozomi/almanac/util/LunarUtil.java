@@ -12,7 +12,7 @@ public class LunarUtil {
 			return e2c(solarYear, solarMonth, solarDay);
 		}
 	}
-	
+
 	private static int GetBit(int m, int n) {
 		return (m >> n) & 1;
 	}
