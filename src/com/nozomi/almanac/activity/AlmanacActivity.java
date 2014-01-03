@@ -12,9 +12,11 @@ import com.nozomi.almanac.util.LunarUtil;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -36,8 +38,18 @@ public class AlmanacActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(0, 1, 1, "¹ØÓÚ");
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		if (item.getItemId() == 1) {
+			Intent intent = new Intent(this, AboutActivity.class);
+			startActivity(intent);
+		}
+
 		return true;
 	}
 

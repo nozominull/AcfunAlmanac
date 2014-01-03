@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-       
         android:textColor="#333"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -21,7 +20,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        
         android:textColor="#cf3333"
         android:textSize="38sp"
         android:textStyle="bold" />
@@ -33,7 +31,6 @@
         android:layout_below="@+id/item_date_calendar"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-       
         android:textColor="#666"
         android:textSize="12sp"
         android:textStyle="italic" />

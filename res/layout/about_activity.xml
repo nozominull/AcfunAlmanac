@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/acfun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="本软件算法来自acfun，如有数据冲突一切以acfun为准。"
+        android:textColor="#444"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/github"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acfun"
+        android:layout_marginTop="15dp" >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/github" />
+
+        <TextView
+            android:id="@+id/github_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:text="代码已开源到github。"
+            android:textColor="#444"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weibo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/github"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp" >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/nozomi" />
+
+        <TextView
+            android:id="@+id/weibo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text="xuyangbill@新浪微博"
+            android:textColor="#444"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</RelativeLayout>
