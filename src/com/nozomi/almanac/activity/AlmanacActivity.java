@@ -155,7 +155,7 @@ public class AlmanacActivity extends Activity {
 	}
 
 	private void f(TextView itemSignCalendarView, long seed) {
-		//
+		//624755是Nozomi的uid，基佬们换成自己的uid
 		final long n = rnd(seed * 624755, 6) % 100;
 		String t = "末吉";
 		// if
