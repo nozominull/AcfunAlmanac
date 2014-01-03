@@ -1,4 +1,4 @@
 AcfunAlmanac
 ============
 
-An almanac originally used by acfun.
+Displays an almanac originally used by acfun for Android.
