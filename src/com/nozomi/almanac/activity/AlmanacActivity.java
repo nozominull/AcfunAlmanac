@@ -3,10 +3,12 @@ package com.nozomi.almanac.activity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 import com.nozomi.almanac.R;
 import com.nozomi.almanac.model.ListItem;
 import com.nozomi.almanac.model.TableItem;
+import com.nozomi.almanac.util.CommUtils;
 import com.nozomi.almanac.util.LunarUtil;
 
 import android.os.Bundle;
@@ -21,17 +23,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AlmanacActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_activity);
+		setContentView(R.layout.almanac_activity);
 
 		initView();
 	}
@@ -48,12 +50,46 @@ public class AlmanacActivity extends Activity {
 		if (item.getItemId() == 1) {
 			Intent intent = new Intent(this, AboutActivity.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
 		}
 
 		return true;
 	}
 
 	private void initView() {
+
+		ImageButton logoHeaderView = (ImageButton) findViewById(R.id.logo_header);
+		logoHeaderView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
+			}
+		});
+
+		ArrayList<Integer> avatars = new ArrayList<Integer>();
+		for (int i = 1; i <= 50; i++) {
+			avatars.add(getResources().getIdentifier(
+					"ac_" + String.format("%02d", i), "drawable",
+					getPackageName()));
+		}
+		Random random = new Random();
+		ImageView avatarHeaderView = (ImageView) findViewById(R.id.avatar_header);
+		avatarHeaderView.setImageResource(avatars.get(1 + random.nextInt(50)));
+
+		ImageButton settingView = (ImageButton) findViewById(R.id.setting);
+		settingView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(AlmanacActivity.this,
+						SettingActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.push_left_in,
+						R.anim.push_left_out);
+			}
+		});
 
 		Calendar calendar = Calendar.getInstance(Locale.CHINESE);
 		String[] dayOfWeek = { "日", "一", "二", "三", "四", "五", "六" };
@@ -104,13 +140,6 @@ public class AlmanacActivity extends Activity {
 		list.add(new ListItem("早睡", "早睡早起方能养生", "会在半夜醒来，然后失眠"));
 		list.add(new ListItem("逛街", "物美价廉大优惠", "会遇到奸商"));
 
-		ArrayList<Integer> avatars = new ArrayList<Integer>();
-		for (int i = 1; i <= 50; i++) {
-			avatars.add(getResources().getIdentifier(
-					"ac_" + String.format("%02d", i), "drawable",
-					getPackageName()));
-		}
-
 		long sg = rnd(seed, 8) % 100;
 		ArrayList<TableItem> goodTableItemArray = new ArrayList<TableItem>();
 		for (long i = 0, l = rnd(seed, 9) % 3 + 2; i < l; i++) {
@@ -155,7 +184,7 @@ public class AlmanacActivity extends Activity {
 	}
 
 	private void f(TextView itemSignCalendarView, long seed) {
-		//624755是Nozomi的uid，基佬们换成自己的uid
+		// 624755是Nozomi的uid，基佬们换成自己的uid
 		final long n = rnd(seed * 624755, 6) % 100;
 		String t = "末吉";
 		// if
@@ -192,9 +221,7 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(AlmanacActivity.this, "今日运势指数：" + n + "%",
-						Toast.LENGTH_SHORT).show();
-
+				CommUtils.makeToast(AlmanacActivity.this, "今日运势指数：" + n + "%");
 			}
 		});
 	}
