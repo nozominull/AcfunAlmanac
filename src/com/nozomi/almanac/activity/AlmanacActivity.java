@@ -286,13 +286,12 @@ public class AlmanacActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);		
+		MobclickAgent.onPause(this);
 	}
-	
+
 	@Override
-	public void onBackPressed() {		
+	public void onBackPressed() {
 		finish();
-		overridePendingTransition(R.anim.push_left_in,
-				R.anim.push_left_out);
+		overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 	}
 }

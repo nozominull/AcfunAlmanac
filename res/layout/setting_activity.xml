@@ -53,7 +53,7 @@
         android:layout_below="@+id/topic_bar"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_normal"
-        android:text="基本选项"
+        android:text="提醒选项"
         android:textColor="@color/text_light"
         android:textSize="@dimen/text_small" />
 
