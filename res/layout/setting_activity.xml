@@ -1,8 +1,203 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/background" >
 
- 
+    <RelativeLayout
+        android:id="@+id/topic_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/back"
+            android:contentDescription="@string/app_name" />
+
+        <ImageButton
+            android:id="@+id/logo_header"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/back"
+            android:background="@drawable/almanac_logo_header"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/avatar_header"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/logo_header"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:layout_below="@+id/logo_header"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="#716f6f"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/basic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topic_bar"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="基本选项"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/text_small" />
+
+    <LinearLayout
+        android:id="@+id/basic_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/basic"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/box"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/notification_state_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/margin_big"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="状态栏提醒"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <CheckBox
+                android:id="@+id/notification_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_small"
+                android:checked="false"
+                android:clickable="false" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/notification_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/notification_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="提醒时间"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:id="@+id/notification_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:text="09:00"
+                android:textColor="@color/text_light"
+                android:textSize="@dimen/text_small" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/basic_layout"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_big"
+        android:text="其他选项"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/text_small" />
+
+    <LinearLayout
+        android:id="@+id/other_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/other"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/box"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_big"
+            android:text="关于我们"
+            android:textColor="@color/text_normal"
+            android:textSize="@dimen/text_normal" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <RelativeLayout
+            android:id="@+id/check_update_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="检查更新"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:text="当前版本: 1.02"
+                android:textColor="@color/text_light"
+                android:textSize="@dimen/text_small" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

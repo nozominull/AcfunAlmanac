@@ -1,19 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/background" >
 
     <RelativeLayout
         android:id="@+id/topic_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/back"
+            android:contentDescription="@string/app_name" />
 
         <ImageButton
             android:id="@+id/logo_header"
             android:layout_width="126dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/back"
             android:background="@drawable/almanac_logo_header"
             android:contentDescription="@string/app_name" />
 
@@ -21,8 +32,8 @@
             android:id="@+id/avatar_header"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:layout_toRightOf="@+id/logo_header"
             android:contentDescription="@string/app_name" />
 
@@ -31,16 +42,16 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:background="@drawable/almanac_setting"
             android:contentDescription="@string/app_name" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/divider"
             android:layout_below="@+id/logo_header"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:background="#716f6f"
             android:contentDescription="@string/app_name" />
     </RelativeLayout>
@@ -50,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topic_bar"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
         android:textColor="#333"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -62,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/topic_bar"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
         android:textColor="#cf3333"
         android:textSize="38sp"
         android:textStyle="bold" />
@@ -73,10 +84,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_date_calendar"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
         android:textColor="#666"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_small"
         android:textStyle="italic" />
 
     <LinearLayout
@@ -84,9 +95,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_subdate_calendar"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_big"
         android:orientation="horizontal" >
 
         <TextView
@@ -114,8 +125,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/good"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
         android:orientation="horizontal" >
 
         <TextView

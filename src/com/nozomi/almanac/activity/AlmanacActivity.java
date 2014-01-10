@@ -10,6 +10,8 @@ import com.nozomi.almanac.model.ListItem;
 import com.nozomi.almanac.model.TableItem;
 import com.nozomi.almanac.util.CommUtils;
 import com.nozomi.almanac.util.LunarUtil;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,8 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -36,28 +36,19 @@ public class AlmanacActivity extends Activity {
 		setContentView(R.layout.almanac_activity);
 
 		initView();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 1, 1, "¹ØÓÚ");
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		if (item.getItemId() == 1) {
-			Intent intent = new Intent(this, AboutActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.push_left_in,
-					R.anim.push_left_out);
-		}
-
-		return true;
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
 	}
 
 	private void initView() {
+		ImageButton backView = (ImageButton) findViewById(R.id.back);
+		backView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 
 		ImageButton logoHeaderView = (ImageButton) findViewById(R.id.logo_header);
 		logoHeaderView.setOnClickListener(new OnClickListener() {
@@ -260,27 +251,48 @@ public class AlmanacActivity extends Activity {
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.table_item, null, false);
 
-				holder.cView = (ImageView) convertView.findViewById(R.id.c);
-				holder.aView = (TextView) convertView.findViewById(R.id.a);
-				holder.bView = (TextView) convertView.findViewById(R.id.b);
+				holder.avatarView = (ImageView) convertView
+						.findViewById(R.id.avatar);
+				holder.nameView = (TextView) convertView
+						.findViewById(R.id.name);
+				holder.contentView = (TextView) convertView
+						.findViewById(R.id.content);
 				convertView.setTag(holder);
 			} else {
 				holder = (GViewHolder) convertView.getTag();
 			}
 
 			TableItem tableItem = tableItemArray.get(position);
-			holder.cView.setImageResource(tableItem.getC());
-			holder.aView.setText(tableItem.getA());
-			holder.bView.setText(tableItem.getB());
+			holder.avatarView.setImageResource(tableItem.getAvatar());
+			holder.nameView.setText(tableItem.getName());
+			holder.contentView.setText(tableItem.getContent());
 
 			return convertView;
 		}
 
 		private class GViewHolder {
-			ImageView cView;
-			TextView aView;
-			TextView bView;
+			ImageView avatarView;
+			TextView nameView;
+			TextView contentView;
 		}
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);		
+	}
+	
+	@Override
+	public void onBackPressed() {		
+		finish();
+		overridePendingTransition(R.anim.push_left_in,
+				R.anim.push_left_out);
+	}
 }

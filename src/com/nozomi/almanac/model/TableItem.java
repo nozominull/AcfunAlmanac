@@ -2,37 +2,39 @@ package com.nozomi.almanac.model;
 
 public class TableItem {
 
-	private int c;
-	private String a;
-	private String b;
+	private int avatar;
+	private String name;
+	private String content;
 
-	public TableItem(int c, String a, String b) {
-		this.c = c;
-		this.a = a;
-		this.b = b;
+	public TableItem(int avatar, String name, String content) {
+		super();
+		this.avatar = avatar;
+		this.name = name;
+		this.content = content;
 	}
 
-	public int getC() {
-		return c;
+	public int getAvatar() {
+		return avatar;
 	}
 
-	public void setC(int c) {
-		this.c = c;
+	public void setAvatar(int avatar) {
+		this.avatar = avatar;
 	}
 
-	public String getA() {
-		return a;
+	public String getName() {
+		return name;
 	}
 
-	public void setA(String a) {
-		this.a = a;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getB() {
-		return b;
+	public String getContent() {
+		return content;
 	}
 
-	public void setB(String b) {
-		this.b = b;
+	public void setContent(String content) {
+		this.content = content;
 	}
+
 }

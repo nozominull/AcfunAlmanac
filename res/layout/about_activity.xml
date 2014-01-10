@@ -1,61 +1,173 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/background" >
 
-    <LinearLayout
-        android:id="@+id/github"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp" >
+    <RelativeLayout
+        android:id="@+id/topic_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/about_github" />
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/back"
+            android:contentDescription="@string/app_name" />
 
-        <TextView
-            android:id="@+id/github_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:text="代码已开源到github。"
-            android:textColor="#444"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/weibo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/github"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp" >
+        <ImageButton
+            android:id="@+id/logo_header"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/back"
+            android:background="@drawable/almanac_logo_header"
+            android:contentDescription="@string/app_name" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/about_nozomi" />
+            android:id="@+id/avatar_header"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toRightOf="@+id/logo_header"
+            android:contentDescription="@string/app_name" />
 
-        <TextView
-            android:id="@+id/weibo_text"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:layout_below="@+id/logo_header"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="#716f6f"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topic_bar"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@drawable/box"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            android:text="xuyangbill@新浪微博"
-            android:textColor="#444"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="版本:"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:text="1.02"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="微博:"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:id="@+id/weibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:text="xuyangbill@新浪微博"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="主页:"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:id="@+id/github"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:text="AcfunAlmanac@github"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingTop="@dimen/margin_big" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="声明:"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:id="@+id/acfun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:text="Acfun弹幕视频网  权利所有"
+                android:textColor="@color/text_normal"
+                android:textSize="@dimen/text_normal" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

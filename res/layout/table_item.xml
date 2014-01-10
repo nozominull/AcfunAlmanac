@@ -2,36 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp" >
+    android:paddingBottom="@dimen/margin_small"
+    android:paddingTop="@dimen/margin_small" >
 
     <ImageView
-        android:id="@+id/c"
+        android:id="@+id/avatar"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/margin_normal"
         android:contentDescription="@string/app_name" />
 
     <TextView
-        android:id="@+id/a"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/c"
-        android:textColor="#444"
-        android:textSize="19sp"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_toRightOf="@+id/avatar"
+        android:textColor="@color/text_normal"
+        android:textSize="@dimen/text_big"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/b"
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/a"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/c"
-        android:textColor="#777"
-        android:textSize="12sp"
+        android:layout_below="@+id/name"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_toRightOf="@+id/avatar"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/text_small"
         android:textStyle="italic" />
 
 </RelativeLayout>

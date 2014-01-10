@@ -1,9 +1,9 @@
 package com.nozomi.almanac.activity;
 
 import com.nozomi.almanac.R;
+import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
@@ -46,6 +46,18 @@ public class SplashActivity extends Activity {
 		ImageView logoView = (ImageView) findViewById(R.id.logo);
 		logoView.startAnimation(animation);
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 }
