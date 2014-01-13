@@ -78,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/margin_big"
-                android:layout_marginLeft="@dimen/margin_big"
-                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_big"
                 android:text="状态栏提醒"
                 android:textColor="@color/text_normal"
                 android:textSize="@dimen/text_normal" />
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/margin_normal"
                 android:text="提醒时间"
                 android:textColor="@color/text_normal"
                 android:textSize="@dimen/text_normal" />

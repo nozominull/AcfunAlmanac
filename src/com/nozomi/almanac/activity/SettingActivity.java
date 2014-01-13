@@ -68,7 +68,7 @@ public class SettingActivity extends Activity {
 		});
 
 		ArrayList<Integer> avatars = new ArrayList<Integer>();
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 1; i <= 54; i++) {
 			avatars.add(getResources().getIdentifier(
 					"ac_" + String.format("%02d", i), "drawable",
 					getPackageName()));
@@ -107,6 +107,8 @@ public class SettingActivity extends Activity {
 				editor.putBoolean(CommDef.SP_NOTIFICATION_STATE,
 						notificationState);
 				editor.commit();
+				CommUtils.setAlarm(SettingActivity.this);
+				CommUtils.makeToast(SettingActivity.this, "设置成功");
 			}
 		});
 
@@ -196,6 +198,8 @@ public class SettingActivity extends Activity {
 				notificationTimeView.setText(notificationTime);
 				editor.putString(CommDef.SP_NOTIFICATION_TIME, notificationTime);
 				editor.commit();
+				CommUtils.setAlarm(SettingActivity.this);
+				CommUtils.makeToast(SettingActivity.this, "设置成功");
 			}
 
 		}, hourOfDay, minute, true).show();

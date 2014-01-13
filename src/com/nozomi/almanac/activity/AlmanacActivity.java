@@ -55,38 +55,9 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
+				 CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
 
-				Pair<Long, String> fortunePair = CommUtils.getFortune();
-				StringBuilder sb = new StringBuilder();
 
-				sb.append("宜");
-				Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = CommUtils
-						.getTableItemArray(AlmanacActivity.this);
-				boolean isFirst = true;
-				for (TableItem tableItem : tableItemArrayPair.first) {
-					if (isFirst) {
-						isFirst = false;
-						sb.append(":");
-					} else {
-						sb.append(",");
-					}
-					sb.append(tableItem.getName());
-				}
-				sb.append(";忌");
-				isFirst = true;
-				for (TableItem tableItem : tableItemArrayPair.second) {
-					if (isFirst) {
-						isFirst = false;
-						sb.append(":");
-					} else {
-						sb.append(",");
-					}
-					sb.append(tableItem.getName());
-				}
-				sb.append("。");
-				CommUtils.makeNotification(AlmanacActivity.this, "今日运势:"
-						+ fortunePair.second, sb.toString());
 			}
 		});
 
