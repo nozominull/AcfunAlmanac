@@ -62,7 +62,7 @@ public class AlmanacActivity extends Activity {
 		});
 
 		ArrayList<Integer> avatars = new ArrayList<Integer>();
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 1; i <= 54; i++) {
 			avatars.add(getResources().getIdentifier(
 					"ac_" + String.format("%02d", i), "drawable",
 					getPackageName()));
