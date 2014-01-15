@@ -10,6 +10,13 @@ import com.nozomi.almanac.model.TableItem;
 import com.nozomi.almanac.util.CommUtils;
 import com.nozomi.almanac.util.LunarUtil;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.scrshot.adapter.UMAppAdapter;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.sensor.UMSensor.OnSensorListener;
+import com.umeng.socialize.sensor.UMSensor.WhitchButton;
+import com.umeng.socialize.sensor.controller.UMShakeService;
+import com.umeng.socialize.sensor.controller.impl.UMShakeServiceFactory;
 import com.umeng.update.UmengUpdateAgent;
 
 import android.os.Bundle;
@@ -17,6 +24,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.SensorEvent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +38,20 @@ import android.widget.TextView;
 
 public class AlmanacActivity extends Activity {
 
+	private UMShakeService mShakeController;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.almanac_activity);
 
-		initView();
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
+
+		initView();
+
+		mShakeController = UMShakeServiceFactory
+				.getShakeService("share almanac");
 	}
 
 	private void initView() {
@@ -55,8 +69,7 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				 CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
-
+				CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
 
 			}
 		});
@@ -189,16 +202,69 @@ public class AlmanacActivity extends Activity {
 		}
 	}
 
+	private OnSensorListener mSensorListener = new OnSensorListener() {
+
+		@Override
+		public void onStart() {
+		}
+
+		/**
+		 * 分享完成后回调
+		 */
+		@Override
+		public void onComplete(SHARE_MEDIA platform, int eCode,
+				SocializeEntity entity) {
+			if (eCode == 200) {
+				CommUtils.makeToast(AlmanacActivity.this, "分享成功");
+			}
+		}
+
+		/**
+		 * @Description: 摇一摇动作完成后回调
+		 */
+		@Override
+		public void onActionComplete(SensorEvent event) {
+			// Toast.makeText(YourActivity.this, "用户摇一摇，可在这暂停游戏",
+			// Toast.LENGTH_SHORT).show();
+		}
+
+		/**
+		 * @Description: 用户点击分享窗口的取消和分享按钮触发的回调
+		 * @param button
+		 *            用户在分享窗口点击的按钮，有取消和分享两个按钮
+		 */
+		@Override
+		public void onButtonClick(WhitchButton button) {
+			if (button == WhitchButton.BUTTON_CANCEL) {
+				// Toast.makeText(YourActivity.this, "取消分享,游戏重新开始",
+				// Toast.LENGTH_SHORT).show();
+			} else {
+				// 分享中, ( 用户点击了分享按钮 )
+			}
+		}
+	};
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
+		UMAppAdapter appAdapter = new UMAppAdapter(AlmanacActivity.this);
+		// 配置摇一摇截屏分享时用户可选的平台，最多支持五个平台
+		ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
+		platforms.add(SHARE_MEDIA.SINA);
+		// 设置摇一摇分享的文字内容
+		mShakeController.setShareContent("test");
+		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
+		mShakeController.registerShakeListender(AlmanacActivity.this,
+				appAdapter, platforms, mSensorListener);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+
+		mShakeController.unregisterShakeListener(AlmanacActivity.this);
 	}
 
 	@Override
