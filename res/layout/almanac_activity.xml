@@ -149,4 +149,13 @@
             android:divider="@null" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/shake"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/almanac_shake"
+        android:contentDescription="@string/app_name" />
+
 </RelativeLayout>

@@ -29,6 +29,8 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
@@ -140,6 +142,15 @@ public class AlmanacActivity extends Activity {
 				tableItemArrayPair.second);
 		badRightView.setAdapter(badTableItemAdapter);
 
+		ImageView shackView = (ImageView) findViewById(R.id.shake);
+		RotateAnimation animation  = new RotateAnimation(0, 45, Animation.RELATIVE_TO_SELF,
+				0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		animation.setDuration(400);
+		animation.setRepeatMode(Animation.REVERSE);
+		animation.setRepeatCount(Animation.INFINITE);	
+		shackView.startAnimation(animation);
+			
+		
 	}
 
 	private class TableItemAdapter extends BaseAdapter {
