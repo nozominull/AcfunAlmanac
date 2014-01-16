@@ -13,10 +13,15 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.scrshot.adapter.UMAppAdapter;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.RequestType;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.UMSsoHandler;
 import com.umeng.socialize.sensor.UMSensor.OnSensorListener;
 import com.umeng.socialize.sensor.UMSensor.WhitchButton;
 import com.umeng.socialize.sensor.controller.UMShakeService;
 import com.umeng.socialize.sensor.controller.impl.UMShakeServiceFactory;
+import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
 
 import android.os.Bundle;
@@ -41,16 +46,21 @@ import android.widget.TextView;
 public class AlmanacActivity extends Activity {
 
 	private UMShakeService mShakeController;
+	private UMSocialService mController;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.almanac_activity);
 
+		initView();
+
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 
-		initView();
+		mController = UMServiceFactory.getUMSocialService("com.umeng.share",
+				RequestType.SOCIAL);
+		mController.getConfig().setSsoHandler(new SinaSsoHandler());
 
 		mShakeController = UMShakeServiceFactory
 				.getShakeService("share almanac");
@@ -233,9 +243,7 @@ public class AlmanacActivity extends Activity {
 		@Override
 		public void onComplete(SHARE_MEDIA platform, int eCode,
 				SocializeEntity entity) {
-			if (eCode == 200) {
-				CommUtils.makeToast(AlmanacActivity.this, "分享成功");
-			}
+
 		}
 
 		/**
@@ -264,6 +272,19 @@ public class AlmanacActivity extends Activity {
 	};
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/** 使用SSO授权必须添加如下代码 */
+
+		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
+				requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
@@ -275,7 +296,7 @@ public class AlmanacActivity extends Activity {
 		mShakeController.setShareContent("#Acfun黄历#");
 		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
 		mShakeController.registerShakeListender(AlmanacActivity.this,
-				appAdapter, false,platforms, mSensorListener);
+				appAdapter, false, platforms, mSensorListener);
 	}
 
 	@Override
