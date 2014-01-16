@@ -15,7 +15,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		Pair<Long, String> fortunePair = CommUtils.getFortune();
+		Pair<Long, String> fortunePair = CommUtils.getFortune(context);
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("рк");

@@ -110,7 +110,7 @@ public class AlmanacActivity extends Activity {
 				+ dayOfWeek[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
 
 		TextView itemSignCalendarView = (TextView) findViewById(R.id.item_sign_calendar);
-		final Pair<Long, String> fortunePair = CommUtils.getFortune();
+		final Pair<Long, String> fortunePair = CommUtils.getFortune(this);
 
 		itemSignCalendarView.setText(fortunePair.second);
 		itemSignCalendarView.setTextColor(Color.rgb(
@@ -156,7 +156,6 @@ public class AlmanacActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				CommUtils.makeToast(AlmanacActivity.this, "摇一摇");
-
 			}
 		});
 
@@ -276,7 +275,7 @@ public class AlmanacActivity extends Activity {
 		mShakeController.setShareContent("#Acfun黄历#");
 		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
 		mShakeController.registerShakeListender(AlmanacActivity.this,
-				appAdapter, platforms, mSensorListener);
+				appAdapter, false,platforms, mSensorListener);
 	}
 
 	@Override

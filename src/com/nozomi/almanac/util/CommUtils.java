@@ -17,6 +17,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
@@ -126,14 +127,24 @@ public class CommUtils {
 
 	}
 
-	public static Pair<Long, String> getFortune() {
+	public static Pair<Long, String> getFortune(Context context) {
 		Calendar calendar = Calendar.getInstance(Locale.CHINA);
 
 		long seed = calendar.get(Calendar.YEAR) * 37621
 				+ (calendar.get(Calendar.MONTH) + 1) * 539
 				+ calendar.get(Calendar.DATE);
 
-		// 624755是Nozomi的uid，基佬们换成自己的uid
+		// A站用的是uid，这里用时间戳代替
+		SharedPreferences sp = context.getSharedPreferences("acfun_almanac",
+				Context.MODE_PRIVATE);
+		int uid = sp.getInt(CommDef.SP_UID, 0);
+		if (uid == 0) {
+			uid = (int) (System.currentTimeMillis() % 1000000);
+			Editor editor = sp.edit();
+			editor.putInt(CommDef.SP_UID, uid);
+			editor.commit();
+		}
+
 		long fortune = rnd(seed * 624755, 6) % 100;
 		String fortuneLevel = "末吉";
 		// if
