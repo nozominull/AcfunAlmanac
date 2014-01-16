@@ -54,6 +54,7 @@ public class AlmanacActivity extends Activity {
 
 		mShakeController = UMShakeServiceFactory
 				.getShakeService("share almanac");
+
 	}
 
 	private void initView() {
@@ -143,14 +144,22 @@ public class AlmanacActivity extends Activity {
 		badRightView.setAdapter(badTableItemAdapter);
 
 		ImageView shackView = (ImageView) findViewById(R.id.shake);
-		RotateAnimation animation  = new RotateAnimation(0, 45, Animation.RELATIVE_TO_SELF,
-				0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		RotateAnimation animation = new RotateAnimation(0, 45,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
 		animation.setDuration(400);
 		animation.setRepeatMode(Animation.REVERSE);
-		animation.setRepeatCount(Animation.INFINITE);	
+		animation.setRepeatCount(Animation.INFINITE);
 		shackView.startAnimation(animation);
-			
-		
+		shackView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				CommUtils.makeToast(AlmanacActivity.this, "摇一摇");
+
+			}
+		});
+
 	}
 
 	private class TableItemAdapter extends BaseAdapter {
@@ -264,7 +273,7 @@ public class AlmanacActivity extends Activity {
 		ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
 		platforms.add(SHARE_MEDIA.SINA);
 		// 设置摇一摇分享的文字内容
-		mShakeController.setShareContent("test");
+		mShakeController.setShareContent("#Acfun黄历#");
 		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
 		mShakeController.registerShakeListender(AlmanacActivity.this,
 				appAdapter, platforms, mSensorListener);

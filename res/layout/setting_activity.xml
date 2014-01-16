@@ -194,7 +194,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_normal"
-                android:text="当前版本: 1.02"
+                android:text="当前版本: 1.20"
                 android:textColor="@color/text_light"
                 android:textSize="@dimen/text_small" />
         </RelativeLayout>
