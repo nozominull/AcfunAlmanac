@@ -189,12 +189,12 @@
                 android:textSize="@dimen/text_normal" />
 
             <TextView
+                android:id="@+id/version_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_normal"
-                android:text="当前版本: 1.20"
                 android:textColor="@color/text_light"
                 android:textSize="@dimen/text_small" />
         </RelativeLayout>

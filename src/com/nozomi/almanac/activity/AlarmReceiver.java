@@ -18,7 +18,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Pair<Long, String> fortunePair = CommUtils.getFortune(context);
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("“À");
+		sb.append("ÂÆú");
 		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = CommUtils
 				.getTableItemArray(context);
 		boolean isFirst = true;
@@ -31,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			}
 			sb.append(tableItem.getName());
 		}
-		sb.append(";º…");
+		sb.append(";Âøå");
 		isFirst = true;
 		for (TableItem tableItem : tableItemArrayPair.second) {
 			if (isFirst) {
@@ -42,8 +42,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 			}
 			sb.append(tableItem.getName());
 		}
-		sb.append("°£");
-		CommUtils.makeNotification(context, "ΩÒ»’‘À ∆:" + fortunePair.second,
+		sb.append("„ÄÇ");
+		CommUtils.makeNotification(context, "‰ªäÊó•ËøêÂäø:" + fortunePair.second,
 				sb.toString());
 	}
 }

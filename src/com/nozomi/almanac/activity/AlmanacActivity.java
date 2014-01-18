@@ -82,7 +82,7 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AlmanacActivity.this, "ÈÏÕæÄã¾ÍÊäÁË");
+				CommUtils.makeToast(AlmanacActivity.this, "è®¤çœŸä½ å°±è¾“äº†");
 
 			}
 		});
@@ -111,12 +111,12 @@ public class AlmanacActivity extends Activity {
 		});
 
 		Calendar calendar = Calendar.getInstance(Locale.CHINA);
-		String[] dayOfWeek = { "ÈÕ", "Ò»", "¶ş", "Èı", "ËÄ", "Îå", "Áù" };
+		String[] dayOfWeek = { "æ—¥", "ä¸€", "äºŒ", "ä¸‰", "å››", "äº”", "å…­" };
 
 		TextView itemDateCalendarView = (TextView) findViewById(R.id.item_date_calendar);
-		itemDateCalendarView.setText(calendar.get(Calendar.YEAR) + "Äê"
-				+ (1 + calendar.get(Calendar.MONTH)) + "ÔÂ"
-				+ calendar.get(Calendar.DATE) + "ÈÕ ĞÇÆÚ"
+		itemDateCalendarView.setText(calendar.get(Calendar.YEAR) + "å¹´"
+				+ (1 + calendar.get(Calendar.MONTH)) + "æœˆ"
+				+ calendar.get(Calendar.DATE) + "æ—¥ æ˜ŸæœŸ"
 				+ dayOfWeek[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
 
 		TextView itemSignCalendarView = (TextView) findViewById(R.id.item_sign_calendar);
@@ -129,7 +129,7 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AlmanacActivity.this, "½ñÈÕÔËÊÆÖ¸Êı£º"
+				CommUtils.makeToast(AlmanacActivity.this, "ä»Šæ—¥è¿åŠ¿æŒ‡æ•°ï¼š"
 						+ fortunePair.first + "%");
 			}
 		});
@@ -165,7 +165,7 @@ public class AlmanacActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AlmanacActivity.this, "Ò¡Ò»Ò¡");
+				CommUtils.makeToast(AlmanacActivity.this, "æ‘‡ä¸€æ‘‡");
 			}
 		});
 
@@ -238,7 +238,7 @@ public class AlmanacActivity extends Activity {
 		}
 
 		/**
-		 * ·ÖÏíÍê³Éºó»Øµ÷
+		 * åˆ†äº«å®Œæˆåå›è°ƒ
 		 */
 		@Override
 		public void onComplete(SHARE_MEDIA platform, int eCode,
@@ -247,26 +247,26 @@ public class AlmanacActivity extends Activity {
 		}
 
 		/**
-		 * @Description: Ò¡Ò»Ò¡¶¯×÷Íê³Éºó»Øµ÷
+		 * @Description: æ‘‡ä¸€æ‘‡åŠ¨ä½œå®Œæˆåå›è°ƒ
 		 */
 		@Override
 		public void onActionComplete(SensorEvent event) {
-			// Toast.makeText(YourActivity.this, "ÓÃ»§Ò¡Ò»Ò¡£¬¿ÉÔÚÕâÔİÍ£ÓÎÏ·",
+			// Toast.makeText(YourActivity.this, "ç”¨æˆ·æ‘‡ä¸€æ‘‡ï¼Œå¯åœ¨è¿™æš‚åœæ¸¸æˆ",
 			// Toast.LENGTH_SHORT).show();
 		}
 
 		/**
-		 * @Description: ÓÃ»§µã»÷·ÖÏí´°¿ÚµÄÈ¡ÏûºÍ·ÖÏí°´Å¥´¥·¢µÄ»Øµ÷
+		 * @Description: ç”¨æˆ·ç‚¹å‡»åˆ†äº«çª—å£çš„å–æ¶ˆå’Œåˆ†äº«æŒ‰é’®è§¦å‘çš„å›è°ƒ
 		 * @param button
-		 *            ÓÃ»§ÔÚ·ÖÏí´°¿Úµã»÷µÄ°´Å¥£¬ÓĞÈ¡ÏûºÍ·ÖÏíÁ½¸ö°´Å¥
+		 *            ç”¨æˆ·åœ¨åˆ†äº«çª—å£ç‚¹å‡»çš„æŒ‰é’®ï¼Œæœ‰å–æ¶ˆå’Œåˆ†äº«ä¸¤ä¸ªæŒ‰é’®
 		 */
 		@Override
 		public void onButtonClick(WhitchButton button) {
 			if (button == WhitchButton.BUTTON_CANCEL) {
-				// Toast.makeText(YourActivity.this, "È¡Ïû·ÖÏí,ÓÎÏ·ÖØĞÂ¿ªÊ¼",
+				// Toast.makeText(YourActivity.this, "å–æ¶ˆåˆ†äº«,æ¸¸æˆé‡æ–°å¼€å§‹",
 				// Toast.LENGTH_SHORT).show();
 			} else {
-				// ·ÖÏíÖĞ, ( ÓÃ»§µã»÷ÁË·ÖÏí°´Å¥ )
+				// åˆ†äº«ä¸­, ( ç”¨æˆ·ç‚¹å‡»äº†åˆ†äº«æŒ‰é’® )
 			}
 		}
 	};
@@ -274,7 +274,7 @@ public class AlmanacActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		/** Ê¹ÓÃSSOÊÚÈ¨±ØĞëÌí¼ÓÈçÏÂ´úÂë */
+		/** ä½¿ç”¨SSOæˆæƒå¿…é¡»æ·»åŠ å¦‚ä¸‹ä»£ç  */
 
 		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
 				requestCode);
@@ -289,12 +289,12 @@ public class AlmanacActivity extends Activity {
 		super.onResume();
 		MobclickAgent.onResume(this);
 		UMAppAdapter appAdapter = new UMAppAdapter(AlmanacActivity.this);
-		// ÅäÖÃÒ¡Ò»Ò¡½ØÆÁ·ÖÏíÊ±ÓÃ»§¿ÉÑ¡µÄÆ½Ì¨£¬×î¶àÖ§³ÖÎå¸öÆ½Ì¨
+		// é…ç½®æ‘‡ä¸€æ‘‡æˆªå±åˆ†äº«æ—¶ç”¨æˆ·å¯é€‰çš„å¹³å°ï¼Œæœ€å¤šæ”¯æŒäº”ä¸ªå¹³å°
 		ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
 		platforms.add(SHARE_MEDIA.SINA);
-		// ÉèÖÃÒ¡Ò»Ò¡·ÖÏíµÄÎÄ×ÖÄÚÈİ
-		mShakeController.setShareContent("#Acfun»ÆÀú#");
-		// ×¢²áÒ¡Ò»Ò¡½ØÆÁ·ÖÏí¹¦ÄÜ,mSensorListenerÔÚ2.1.2ÖĞ¶¨Òå
+		// è®¾ç½®æ‘‡ä¸€æ‘‡åˆ†äº«çš„æ–‡å­—å†…å®¹
+		mShakeController.setShareContent("#Acfuné»„å†#");
+		// æ³¨å†Œæ‘‡ä¸€æ‘‡æˆªå±åˆ†äº«åŠŸèƒ½,mSensorListeneråœ¨2.1.2ä¸­å®šä¹‰
 		mShakeController.registerShakeListender(AlmanacActivity.this,
 				appAdapter, false, platforms, mSensorListener);
 	}

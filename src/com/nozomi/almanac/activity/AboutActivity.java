@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 public class AboutActivity extends Activity {
 
@@ -43,7 +44,7 @@ public class AboutActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AboutActivity.this, "认真你就输了");
+				CommUtils.makeToast(AboutActivity.this, "璁ょ湡浣犲氨杈撲簡");
 			}
 		});
 
@@ -56,6 +57,26 @@ public class AboutActivity extends Activity {
 		Random random = new Random();
 		ImageView avatarHeaderView = (ImageView) findViewById(R.id.avatar_header);
 		avatarHeaderView.setImageResource(avatars.get(1 + random.nextInt(50)));
+
+		TextView versionNameView = (TextView) findViewById(R.id.version_name);
+		try {
+			String versionName = getPackageManager().getPackageInfo(
+					getPackageName(), 0).versionName;
+			versionNameView.setText(versionName);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		TextView weiboView = (TextView) findViewById(R.id.weibo);
+		weiboView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Uri uri = Uri.parse("http://weibo.com/xuyangbill");
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);
+			}
+		});
 
 		TextView githubView = (TextView) findViewById(R.id.github);
 		githubView.setOnClickListener(new OnClickListener() {
@@ -70,23 +91,12 @@ public class AboutActivity extends Activity {
 			}
 		});
 
-		TextView weiboView = (TextView) findViewById(R.id.weibo);
-		weiboView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Uri uri = Uri.parse("http://weibo.com/xuyangbill");
-				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-				startActivity(intent);
-			}
-		});
-
 		TextView acfunView = (TextView) findViewById(R.id.acfun);
 		acfunView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AboutActivity.this, "认真你就输了");
+				CommUtils.makeToast(AboutActivity.this, "璁ょ湡浣犲氨杈撲簡");
 			}
 		});
 

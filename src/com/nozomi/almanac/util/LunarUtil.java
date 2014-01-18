@@ -77,28 +77,28 @@ public class LunarUtil {
 	}
 
 	private static String GetcDateString(int cYear, int cMonth, int cDay) {
-		String tgString = "¼×ÒÒ±û¶¡Îì¼º¸ıĞÁÈÉ¹ï";
-		String dzString = "×Ó³óÒúÃ®³½ËÈÎçÎ´ÉêÓÏĞçº¥";
-		String sx = "ÊóÅ£»¢ÍÃÁúÉßÂíÑòºï¼¦¹·Öí";
-		String monString = "Õı¶şÈıËÄÎåÁùÆß°Ë¾ÅÊ®¶¬À°";
-		String numString = "Ò»¶şÈıËÄÎåÁùÆß°Ë¾ÅÊ®";
+		String tgString = "ç”²ä¹™ä¸™ä¸æˆŠå·±åºšè¾›å£¬ç™¸";
+		String dzString = "å­ä¸‘å¯…å¯è¾°å·³åˆæœªç”³é…‰æˆŒäº¥";
+		String sx = "é¼ ç‰›è™å…”é¾™è›‡é©¬ç¾ŠçŒ´é¸¡ç‹—çŒª";
+		String monString = "æ­£äºŒä¸‰å››äº”å…­ä¸ƒå…«ä¹åå†¬è…Š";
+		String numString = "ä¸€äºŒä¸‰å››äº”å…­ä¸ƒå…«ä¹å";
 
 		String tmp = "";
 		tmp += tgString.charAt((cYear - 4) % 10);
 		tmp += dzString.charAt((cYear - 4) % 12);
 		tmp += "";
 		tmp += sx.charAt((cYear - 4) % 12);
-		tmp += "Äê ";
+		tmp += "å¹´ ";
 		if (cMonth < 1) {
-			tmp += "Èò";
+			tmp += "é—°";
 			tmp += monString.charAt(-cMonth - 1);
 		} else {
 			tmp += monString.charAt(cMonth - 1);
 		}
 		;
-		tmp += "ÔÂ";
-		tmp += (cDay < 11) ? "³õ" : ((cDay < 20) ? "Ê®" : ((cDay < 30) ? "Ø¥"
-				: "ÈıÊ®"));
+		tmp += "æœˆ";
+		tmp += (cDay < 11) ? "åˆ" : ((cDay < 20) ? "å" : ((cDay < 30) ? "å»¿"
+				: "ä¸‰å"));
 		if (cDay % 10 != 0 || cDay == 10) {
 			tmp += numString.charAt((cDay - 1) % 10);
 		}

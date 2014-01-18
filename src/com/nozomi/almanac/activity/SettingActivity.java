@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 public class SettingActivity extends Activity {
 
@@ -63,7 +64,7 @@ public class SettingActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(SettingActivity.this, "认真你就输了");
+				CommUtils.makeToast(SettingActivity.this, "璁ょ湡浣犲氨杈撲簡");
 			}
 		});
 
@@ -76,6 +77,15 @@ public class SettingActivity extends Activity {
 		Random random = new Random();
 		ImageView avatarHeaderView = (ImageView) findViewById(R.id.avatar_header);
 		avatarHeaderView.setImageResource(avatars.get(1 + random.nextInt(50)));
+
+		TextView versionNameView = (TextView) findViewById(R.id.version_name);
+		try {
+			String versionName = getPackageManager().getPackageInfo(
+					getPackageName(), 0).versionName;
+			versionNameView.setText("褰撳墠鐗堟湰: " + versionName);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		RelativeLayout notificationStateLayoutView = (RelativeLayout) findViewById(R.id.notification_state_layout);
 		final CheckBox notificationStateView = (CheckBox) findViewById(R.id.notification_state);
@@ -108,7 +118,7 @@ public class SettingActivity extends Activity {
 						notificationState);
 				editor.commit();
 				CommUtils.setAlarm(SettingActivity.this);
-				CommUtils.makeToast(SettingActivity.this, "设置成功");
+				CommUtils.makeToast(SettingActivity.this, "璁剧疆鎴愬姛");
 			}
 		});
 
@@ -156,10 +166,10 @@ public class SettingActivity extends Activity {
 									SettingActivity.this, updateInfo);
 							break;
 						case 1:
-							CommUtils.makeToast(SettingActivity.this, "已经是最新版");
+							CommUtils.makeToast(SettingActivity.this, "宸茬粡鏄渶鏂扮増");
 							break;
 						case 3:
-							CommUtils.makeToast(SettingActivity.this, "超时");
+							CommUtils.makeToast(SettingActivity.this, "瓒呮椂");
 							break;
 						}
 
@@ -199,7 +209,7 @@ public class SettingActivity extends Activity {
 				editor.putString(CommDef.SP_NOTIFICATION_TIME, notificationTime);
 				editor.commit();
 				CommUtils.setAlarm(SettingActivity.this);
-				CommUtils.makeToast(SettingActivity.this, "设置成功");
+				CommUtils.makeToast(SettingActivity.this, "璁剧疆鎴愬姛");
 			}
 
 		}, hourOfDay, minute, true).show();

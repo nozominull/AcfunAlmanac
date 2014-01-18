@@ -50,7 +50,7 @@ public class CommUtils {
 		notification.tickerText = title + ";" + text;
 		notification.defaults |= Notification.DEFAULT_SOUND;
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		// ÉèÖÃÍ¨ÖªÏÔÊ¾µÄ²ÎÊı
+		// è®¾ç½®é€šçŸ¥æ˜¾ç¤ºçš„å‚æ•°
 		notification.setLatestEventInfo(context, title, text, pendingIntent);
 		notificationManager.notify(0, notification);
 	}
@@ -72,31 +72,31 @@ public class CommUtils {
 				+ calendar.get(Calendar.DATE);
 
 		ArrayList<ListItem> list = new ArrayList<ListItem>();
-		list.add(new ListItem("¿´AV", "ÊÍ·ÅÑ¹Á¦£¬ÖØÖı×ÔÎÒ", "»á±»¼ÒÈË×²µ½"));
-		list.add(new ListItem("×éÄ£ĞÍ", "½ñÌìµÄÅçÆá»áºÜÍêÃÀ", "¾«Éñ²»¼¯ÖĞ°å¼ş±»¼ô¶ÏÁË"));
-		list.add(new ListItem("Í¶¸åÇé¸ĞÇø", "ÎÊÌâÔ²Âú½â¾ö", "»á±»µ±ÊÂÈË·¢ÏÖ"));
-		list.add(new ListItem("¹äÄäÃû°æ", "½ñÌìÒ²Òª±ø¿â±±", "¿´µ½É¥Ê¬ÔÚÉ¹ÃÃ"));
-		list.add(new ListItem("ºÍÅ®ÉñÁÄÌì", "Å®ÉñºÃ¸Ğ¶ÈÉÏÉı", "ÎÒÈ¥Ï´ÔèÁË£¬ºÇºÇ"));
-		list.add(new ListItem("Å¾Å¾Å¾", "Å¾Å¾Å¾Å¾Å¾Å¾Å¾", "»á¿¨ÔÚÀïÃæ"));
-		list.add(new ListItem("°¾Ò¹", "Ò¹¼äµÄĞ§ÂÊ¸ü¸ß", "Ã÷ÌìÓĞºÜÖØÒªµÄÊÂ"));
-		list.add(new ListItem("¶ÍÁ¶", "°Ë·ÖÖÓ¸øÄã±ÈÀû°ãµÄÉí²Ä", "»áÀ­ÉË¼¡Èâ"));
-		list.add(new ListItem("É¢²½", "Óöµ½ÃÃ×ÓÖ÷¶¯´îÚ¨", "×ßÂ·»á²Èµ½Ë®¿Ó"));
-		list.add(new ListItem("´òÅÅÎ»Èü", "Óöµ½´óÍÈÉÏ·Ö500", "ÎÒ·½ÈıÈË¹Ò»ú"));
-		list.add(new ListItem("»ã±¨¹¤×÷", "±»¿ä½±¹¤×÷ÈÏÕæ", "ÉÏ°àÍµÍæÓÎÏ·±»¿Û¹¤×Ê"));
-		list.add(new ListItem("¸§ÃşÃ¨ßä", "²Å²»ÊÇÌØÒâ²äÄãµÄÄØ", "ËÀ¿ª£¡ÓŞ´ÀµÄÈËÀà"));
-		list.add(new ListItem("åŞ¹·", "Óö¼ûÅ®ÉñåŞ¹·´îÚ¨", "¹·¹·ËæµØ´óĞ¡±ã±»·£¿î"));
-		list.add(new ListItem("Åëâ¿", "ºÚ°µÁÏÀí½ç¾ÍÓÉÎÒÀ´´ò°Ü", "ÄÑµÀÕâ¾ÍÊÇ¡­¡­ÑöÍûĞÇ¿ÕÅÉ£¿"));
-		list.add(new ListItem("¸æ°×", "ÆäÊµÎÒÒ²Ï²»¶ÄãºÃ¾ÃÁË", "¶Ô²»Æğ£¬ÄãÊÇÒ»¸öºÃÈË"));
-		list.add(new ListItem("ÇóÕ¾ÄÚĞÅ", "×îĞÂÖÖ×ÓÈëÊÖ", "ÊÕµ½ÓĞÂëºùÂ«ÍŞ"));
-		list.add(new ListItem("×·ĞÂ·¬", "Íê½áÖ®Ç°ÎÒ¾ø²»»áËÀ", "»á±»¾çÍ¸"));
-		list.add(new ListItem("´ò¿¨ÈÕ³£", "Å­»ØÊ×Ò³", "»á±»ÀÏ°å·¢ÏÖ"));
-		list.add(new ListItem("ÏÂ¸±±¾", "ÅäºÏÄ¬ÆõÒ»´ÎÍ¨¹ı", "»á±»Ãğµ½É¢ÍÅ"));
-		list.add(new ListItem("ÇÀÉ³·¢", "É³·¢ÈëÊÖµ¯ÎŞĞé·¢", "»á±»¹ÒÆğÀ´Ğß³Üplay"));
-		list.add(new ListItem("Íø¹º", "ÉÌÆ·´ó¼õ¼Û", "ÎÊÌâ²úÆ·ĞèÒªÍË»»"));
-		list.add(new ListItem("Ìø²Û", "ĞÂ¹¤×÷´ıÓö´ó·ùÌáÉı", "ÔÙÈÌÒ»ÈÌ¾Í¼ÓĞ½ÁË"));
-		list.add(new ListItem("¶ÁÊé", "ÖªÊ¶¾ÍÊÇÁ¦Á¿", "×¢ÒâÁ¦ÍêÈ«ÎŞ·¨¼¯ÖĞ"));
-		list.add(new ListItem("ÔçË¯", "ÔçË¯ÔçÆğ·½ÄÜÑøÉú", "»áÔÚ°ëÒ¹ĞÑÀ´£¬È»ºóÊ§Ãß"));
-		list.add(new ListItem("¹ä½Ö", "ÎïÃÀ¼ÛÁ®´óÓÅ»İ", "»áÓöµ½¼éÉÌ"));
+		list.add(new ListItem("çœ‹AV", "é‡Šæ”¾å‹åŠ›ï¼Œé‡é“¸è‡ªæˆ‘", "ä¼šè¢«å®¶äººæ’åˆ°"));
+		list.add(new ListItem("ç»„æ¨¡å‹", "ä»Šå¤©çš„å–·æ¼†ä¼šå¾ˆå®Œç¾", "ç²¾ç¥ä¸é›†ä¸­æ¿ä»¶è¢«å‰ªæ–­äº†"));
+		list.add(new ListItem("æŠ•ç¨¿æƒ…æ„ŸåŒº", "é—®é¢˜åœ†æ»¡è§£å†³", "ä¼šè¢«å½“äº‹äººå‘ç°"));
+		list.add(new ListItem("é€›åŒ¿åç‰ˆ", "ä»Šå¤©ä¹Ÿè¦å…µåº“åŒ—", "çœ‹åˆ°ä¸§å°¸åœ¨æ™’å¦¹"));
+		list.add(new ListItem("å’Œå¥³ç¥èŠå¤©", "å¥³ç¥å¥½æ„Ÿåº¦ä¸Šå‡", "æˆ‘å»æ´—æ¾¡äº†ï¼Œå‘µå‘µ"));
+		list.add(new ListItem("å•ªå•ªå•ª", "å•ªå•ªå•ªå•ªå•ªå•ªå•ª", "ä¼šå¡åœ¨é‡Œé¢"));
+		list.add(new ListItem("ç†¬å¤œ", "å¤œé—´çš„æ•ˆç‡æ›´é«˜", "æ˜å¤©æœ‰å¾ˆé‡è¦çš„äº‹"));
+		list.add(new ListItem("é”»ç‚¼", "å…«åˆ†é’Ÿç»™ä½ æ¯”åˆ©èˆ¬çš„èº«æ", "ä¼šæ‹‰ä¼¤è‚Œè‚‰"));
+		list.add(new ListItem("æ•£æ­¥", "é‡åˆ°å¦¹å­ä¸»åŠ¨æ­è®ª", "èµ°è·¯ä¼šè¸©åˆ°æ°´å‘"));
+		list.add(new ListItem("æ‰“æ’ä½èµ›", "é‡åˆ°å¤§è…¿ä¸Šåˆ†500", "æˆ‘æ–¹ä¸‰äººæŒ‚æœº"));
+		list.add(new ListItem("æ±‡æŠ¥å·¥ä½œ", "è¢«å¤¸å¥–å·¥ä½œè®¤çœŸ", "ä¸Šç­å·ç©æ¸¸æˆè¢«æ‰£å·¥èµ„"));
+		list.add(new ListItem("æŠšæ‘¸çŒ«å’ª", "æ‰ä¸æ˜¯ç‰¹æ„è¹­ä½ çš„å‘¢", "æ­»å¼€ï¼æ„šè ¢çš„äººç±»"));
+		list.add(new ListItem("é›ç‹—", "é‡è§å¥³ç¥é›ç‹—æ­è®ª", "ç‹—ç‹—éšåœ°å¤§å°ä¾¿è¢«ç½šæ¬¾"));
+		list.add(new ListItem("çƒ¹é¥ª", "é»‘æš—æ–™ç†ç•Œå°±ç”±æˆ‘æ¥æ‰“è´¥", "éš¾é“è¿™å°±æ˜¯â€¦â€¦ä»°æœ›æ˜Ÿç©ºæ´¾ï¼Ÿ"));
+		list.add(new ListItem("å‘Šç™½", "å…¶å®æˆ‘ä¹Ÿå–œæ¬¢ä½ å¥½ä¹…äº†", "å¯¹ä¸èµ·ï¼Œä½ æ˜¯ä¸€ä¸ªå¥½äºº"));
+		list.add(new ListItem("æ±‚ç«™å†…ä¿¡", "æœ€æ–°ç§å­å…¥æ‰‹", "æ”¶åˆ°æœ‰ç è‘«èŠ¦å¨ƒ"));
+		list.add(new ListItem("è¿½æ–°ç•ª", "å®Œç»“ä¹‹å‰æˆ‘ç»ä¸ä¼šæ­»", "ä¼šè¢«å‰§é€"));
+		list.add(new ListItem("æ‰“å¡æ—¥å¸¸", "æ€’å›é¦–é¡µ", "ä¼šè¢«è€æ¿å‘ç°"));
+		list.add(new ListItem("ä¸‹å‰¯æœ¬", "é…åˆé»˜å¥‘ä¸€æ¬¡é€šè¿‡", "ä¼šè¢«ç­åˆ°æ•£å›¢"));
+		list.add(new ListItem("æŠ¢æ²™å‘", "æ²™å‘å…¥æ‰‹å¼¹æ— è™šå‘", "ä¼šè¢«æŒ‚èµ·æ¥ç¾è€»play"));
+		list.add(new ListItem("ç½‘è´­", "å•†å“å¤§å‡ä»·", "é—®é¢˜äº§å“éœ€è¦é€€æ¢"));
+		list.add(new ListItem("è·³æ§½", "æ–°å·¥ä½œå¾…é‡å¤§å¹…æå‡", "å†å¿ä¸€å¿å°±åŠ è–ªäº†"));
+		list.add(new ListItem("è¯»ä¹¦", "çŸ¥è¯†å°±æ˜¯åŠ›é‡", "æ³¨æ„åŠ›å®Œå…¨æ— æ³•é›†ä¸­"));
+		list.add(new ListItem("æ—©ç¡", "æ—©ç¡æ—©èµ·æ–¹èƒ½å…»ç”Ÿ", "ä¼šåœ¨åŠå¤œé†’æ¥ï¼Œç„¶åå¤±çœ "));
+		list.add(new ListItem("é€›è¡—", "ç‰©ç¾ä»·å»‰å¤§ä¼˜æƒ ", "ä¼šé‡åˆ°å¥¸å•†"));
 
 		long sg = rnd(seed, 8) % 100;
 		ArrayList<TableItem> goodTableItemArray = new ArrayList<TableItem>();
@@ -134,44 +134,38 @@ public class CommUtils {
 				+ (calendar.get(Calendar.MONTH) + 1) * 539
 				+ calendar.get(Calendar.DATE);
 
-		// AÕ¾ÓÃµÄÊÇuid£¬ÕâÀïÓÃÊ±¼ä´Á´úÌæ
+		// Aç«™ç”¨çš„æ˜¯uidï¼Œè¿™é‡Œç”¨æ—¶é—´æˆ³ä»£æ›¿
 		SharedPreferences sp = context.getSharedPreferences("acfun_almanac",
 				Context.MODE_PRIVATE);
 		int uid = sp.getInt(CommDef.SP_UID, 0);
-		if (uid == 0) {
-			uid = (int) (System.currentTimeMillis() % 1000000);
-			Editor editor = sp.edit();
-			editor.putInt(CommDef.SP_UID, uid);
-			editor.commit();
-		}
 
-		long fortune = rnd(seed * 624755, 6) % 100;
-		String fortuneLevel = "Ä©¼ª";
+		long fortune = rnd(seed * uid, 6) % 100;
+		String fortuneLevel = "æœ«å‰";
 		// if
 		if (fortune < 5) {
 			// 5%
-			fortuneLevel = "´óĞ×";
+			fortuneLevel = "å¤§å‡¶";
 		} else if (fortune < 20) {
 			// 15%
-			fortuneLevel = "Ğ×";
+			fortuneLevel = "å‡¶";
 		} else if (fortune < 50) {
 			// 30%
-			fortuneLevel = "Ä©¼ª";
+			fortuneLevel = "æœ«å‰";
 		} else if (fortune < 60) {
 			// 10%
-			fortuneLevel = "°ë¼ª";
+			fortuneLevel = "åŠå‰";
 		} else if (fortune < 70) {
 			// 10%
-			fortuneLevel = "¼ª";
+			fortuneLevel = "å‰";
 		} else if (fortune < 80) {
 			// 10%
-			fortuneLevel = "Ğ¡¼ª";
+			fortuneLevel = "å°å‰";
 		} else if (fortune < 90) {
 			// 10%
-			fortuneLevel = "ÖĞ¼ª";
+			fortuneLevel = "ä¸­å‰";
 		} else {
 			// 5%
-			fortuneLevel = "´ó¼ª";
+			fortuneLevel = "å¤§å‰";
 		}
 		return new Pair<Long, String>(fortune, fortuneLevel);
 	}

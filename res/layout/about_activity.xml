@@ -71,10 +71,10 @@
                 android:textSize="@dimen/text_normal" />
 
             <TextView
+                android:id="@+id/version_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_big"
-                android:text="1.20"
                 android:textColor="@color/text_normal"
                 android:textSize="@dimen/text_normal" />
         </LinearLayout>
