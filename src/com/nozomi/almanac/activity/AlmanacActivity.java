@@ -10,6 +10,7 @@ import com.nozomi.almanac.model.TableItem;
 import com.nozomi.almanac.util.CommUtils;
 import com.nozomi.almanac.util.LunarUtil;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.scrshot.UMScrShotController.OnScreenshotListener;
 import com.umeng.scrshot.adapter.UMAppAdapter;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
@@ -17,6 +18,8 @@ import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.UMSsoHandler;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sensor.UMSensor.OnSensorListener;
 import com.umeng.socialize.sensor.UMSensor.WhitchButton;
 import com.umeng.socialize.sensor.controller.UMShakeService;
@@ -24,10 +27,12 @@ import com.umeng.socialize.sensor.controller.impl.UMShakeServiceFactory;
 import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.SensorEvent;
 import android.util.Pair;
@@ -42,6 +47,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AlmanacActivity extends Activity {
 
@@ -271,6 +277,35 @@ public class AlmanacActivity extends Activity {
 		}
 	};
 
+	private OnScreenshotListener mScrShotListener = new OnScreenshotListener() {
+		@Override
+		public void onComplete(Bitmap bmp) {
+			if (null != bmp) {
+				// 得到截图
+				mController.setShareContent("#Acfun黄历#");
+				mController
+						.setShareImage(new UMImage(AlmanacActivity.this, bmp));
+				mController.postShare(AlmanacActivity.this, SHARE_MEDIA.SINA,
+						new SnsPostListener() {
+							@Override
+							public void onStart() {
+
+							}
+
+							@Override
+							public void onComplete(SHARE_MEDIA platform,
+									int eCode, SocializeEntity entity) {
+								// if (eCode == 200) {
+								// CommUtils.makeToast(AlmanacActivity.this,
+								// "分享成功");
+								// }
+							}
+						});
+
+			}
+		}
+	};
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -288,6 +323,7 @@ public class AlmanacActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
+
 		UMAppAdapter appAdapter = new UMAppAdapter(AlmanacActivity.this);
 		// 配置摇一摇截屏分享时用户可选的平台，最多支持五个平台
 		ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
@@ -295,16 +331,22 @@ public class AlmanacActivity extends Activity {
 		// 设置摇一摇分享的文字内容
 		mShakeController.setShareContent("#Acfun黄历#");
 		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
-		mShakeController.registerShakeListender(AlmanacActivity.this,
-				appAdapter, false, platforms, mSensorListener);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			mShakeController.registerShakeListender(AlmanacActivity.this,
+					appAdapter, false, platforms, mSensorListener);
+		} else {
+			mShakeController.registerShakeToScrShot(AlmanacActivity.this,
+					appAdapter, mScrShotListener);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
-
-		mShakeController.unregisterShakeListener(AlmanacActivity.this);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			mShakeController.unregisterShakeListener(AlmanacActivity.this);
+		}
 	}
 
 	@Override
