@@ -335,7 +335,7 @@ public class AlmanacActivity extends Activity {
 					appAdapter, false, platforms, mSensorListener);
 		} else {
 			mShakeController.registerShakeToScrShot(AlmanacActivity.this,
-					appAdapter, mScrShotListener);
+					appAdapter,false, mScrShotListener);
 		}
 	}
 
