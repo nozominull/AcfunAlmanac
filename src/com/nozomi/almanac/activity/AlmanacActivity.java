@@ -27,7 +27,6 @@ import com.umeng.socialize.sensor.controller.impl.UMShakeServiceFactory;
 import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -50,8 +49,8 @@ import android.widget.TextView;
 
 public class AlmanacActivity extends Activity {
 
-	private UMShakeService mShakeController;
-	private UMSocialService mController;
+	private UMShakeService mShakeController = null;
+	private UMSocialService mController = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -158,15 +157,16 @@ public class AlmanacActivity extends Activity {
 				tableItemArrayPair.second);
 		badRightView.setAdapter(badTableItemAdapter);
 
-		ImageView shackView = (ImageView) findViewById(R.id.shake);
-		RotateAnimation animation = new RotateAnimation(0, 45,
+		ImageView shakeView = (ImageView) findViewById(R.id.shake);
+		Animation animation = new RotateAnimation(0, 45,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);
 		animation.setDuration(400);
 		animation.setRepeatMode(Animation.REVERSE);
 		animation.setRepeatCount(Animation.INFINITE);
-		shackView.startAnimation(animation);
-		shackView.setOnClickListener(new OnClickListener() {
+		shakeView.startAnimation(animation);
+
+		shakeView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -240,6 +240,7 @@ public class AlmanacActivity extends Activity {
 
 		@Override
 		public void onStart() {
+
 		}
 
 		/**

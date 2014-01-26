@@ -65,7 +65,7 @@
             </intent-filter>
         </receiver>
 
-         <activity
+        <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
@@ -73,7 +73,7 @@
             android:theme="@style/Theme.UMDialog"
             android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>
-        
+
         <service
             android:name="com.umeng.common.net.DownloadingService"
             android:process=":DownloadingService" />
