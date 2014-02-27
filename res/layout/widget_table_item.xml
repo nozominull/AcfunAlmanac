@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/margin_small"
-    android:paddingTop="@dimen/margin_small" >
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp" >
 
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="@dimen/margin_normal"
         android:contentDescription="@string/app_name" />
 
@@ -19,7 +19,7 @@
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_toRightOf="@+id/avatar"
         android:textColor="@color/text_normal"
-        android:textSize="@dimen/text_big"
+        android:textSize="@dimen/text_normal"
         android:textStyle="bold" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/avatar"
         android:textColor="@color/text_light"
         android:textSize="@dimen/text_small"

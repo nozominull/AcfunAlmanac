@@ -83,7 +83,6 @@ public class AlmanacActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				CommUtils.makeToast(AlmanacActivity.this, "认真你就输了");
-
 			}
 		});
 
