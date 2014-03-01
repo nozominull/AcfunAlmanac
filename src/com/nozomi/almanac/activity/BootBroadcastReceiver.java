@@ -12,6 +12,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 
 		CommUtils.setAlarm(context);
+		CommUtils.setWidgetAlerm(context);
 	}
 
 }

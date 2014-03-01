@@ -34,14 +34,9 @@ public class SplashActivity extends Activity {
 			if (isFirstRun) {
 				Editor editor = sp.edit();
 				editor.putBoolean(CommDef.SP_IS_FIRST_RUN + versionName, false);
-				int uid = sp.getInt(CommDef.SP_UID, 0);
-				if (uid == 0) {
-					uid = (int) (System.currentTimeMillis() % 1000000);
-					editor.putInt(CommDef.SP_UID, uid);
-				}
-				editor.commit();
 				CommUtils.setAlarm(this);
-
+				CommUtils.setWidgetAlerm(this);
+				editor.commit();
 			}
 
 		} catch (NameNotFoundException e) {

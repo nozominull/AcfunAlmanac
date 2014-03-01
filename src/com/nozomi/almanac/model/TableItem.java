@@ -1,10 +1,18 @@
 package com.nozomi.almanac.model;
 
-public class TableItem {
+import java.io.Serializable;
 
+public class TableItem implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int avatar;
 	private String name;
 	private String content;
+
+	public TableItem() {
+		super();
+
+	}
 
 	public TableItem(int avatar, String name, String content) {
 		super();

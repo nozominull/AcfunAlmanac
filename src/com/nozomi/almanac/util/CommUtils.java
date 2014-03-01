@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.nozomi.almanac.R;
 import com.nozomi.almanac.activity.AlarmReceiver;
 import com.nozomi.almanac.activity.SplashActivity;
+import com.nozomi.almanac.activity.WidgetAlermReceiver;
 import com.nozomi.almanac.model.ListItem;
 import com.nozomi.almanac.model.TableItem;
 
@@ -17,6 +18,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
@@ -56,15 +58,13 @@ public class CommUtils {
 
 	public static Pair<ArrayList<TableItem>, ArrayList<TableItem>> getTableItemArray(
 			Context context) {
-
+		Calendar calendar = Calendar.getInstance(Locale.CHINA);
 		ArrayList<Integer> avatars = new ArrayList<Integer>();
 		for (int i = 1; i <= 50; i++) {
 			avatars.add(context.getResources().getIdentifier(
 					"ac_" + String.format("%02d", i), "drawable",
 					context.getPackageName()));
 		}
-
-		Calendar calendar = Calendar.getInstance(Locale.CHINA);
 
 		long seed = calendar.get(Calendar.YEAR) * 37621
 				+ (calendar.get(Calendar.MONTH) + 1) * 539
@@ -121,8 +121,9 @@ public class CommUtils {
 			avatars.remove(m);
 		}
 
-		return new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
+		Pair<ArrayList<TableItem>, ArrayList<TableItem>> pair = new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
 				goodTableItemArray, badTableItemArray);
+		return pair;
 
 	}
 
@@ -136,7 +137,15 @@ public class CommUtils {
 		// A站用的是uid，这里用时间戳代替
 		SharedPreferences sp = context.getSharedPreferences("acfun_almanac",
 				Context.MODE_PRIVATE);
+		
 		int uid = sp.getInt(CommDef.SP_UID, 0);
+		if (uid == 0) {
+			Editor editor = sp.edit();
+			uid = (int) (System.currentTimeMillis() % 1000000);
+			editor.putInt(CommDef.SP_UID, uid);
+			editor.commit();
+		}				
+		
 
 		long fortune = rnd(seed * uid, 6) % 100;
 		String fortuneLevel = "末吉";
@@ -215,5 +224,27 @@ public class CommUtils {
 					calendar.getTimeInMillis(), (24 * 60 * 60 * 1000),
 					pendingIntent);
 		}
+	}
+
+	public static void setWidgetAlerm(Context context) {
+		AlarmManager am = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+
+		Intent intent = new Intent(context, WidgetAlermReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 2,
+				intent, 0);
+		am.cancel(pendingIntent);
+
+		Calendar calendar = Calendar.getInstance(Locale.CHINA);
+		calendar.set(Calendar.HOUR_OF_DAY, 00);
+		calendar.set(Calendar.MINUTE, 00);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+			calendar.add(Calendar.DATE, 1);
+		}
+		am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+				(24 * 60 * 60 * 1000), pendingIntent);
+
 	}
 }
