@@ -17,7 +17,6 @@ import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.UMSsoHandler;
-import com.umeng.socialize.media.WeiXinShareContent;
 import com.umeng.socialize.sensor.UMSensor.OnSensorListener;
 import com.umeng.socialize.sensor.UMSensor.WhitchButton;
 import com.umeng.socialize.sensor.controller.UMShakeService;
