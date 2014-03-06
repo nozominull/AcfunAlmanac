@@ -7,6 +7,14 @@ import com.nozomi.almanac.R;
 import com.nozomi.almanac.util.CommDef;
 import com.nozomi.almanac.util.CommUtils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.RequestType;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.UMSsoHandler;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -134,19 +142,6 @@ public class SettingActivity extends Activity {
 			}
 		});
 
-		TextView aboutView = (TextView) findViewById(R.id.about);
-		aboutView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(SettingActivity.this,
-						AboutActivity.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.push_left_in,
-						R.anim.push_left_out);
-			}
-		});
-
 		RelativeLayout checkUpdateLayoutView = (RelativeLayout) findViewById(R.id.check_update_layout);
 		checkUpdateLayoutView.setOnClickListener(new OnClickListener() {
 
@@ -175,6 +170,45 @@ public class SettingActivity extends Activity {
 
 					}
 				});
+			}
+		});
+
+		TextView feedbackView = (TextView) findViewById(R.id.feedback);
+		feedbackView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				UMSocialService mController = UMServiceFactory
+						.getUMSocialService("com.umeng.share",
+								RequestType.SOCIAL);
+				mController.getConfig().setSsoHandler(new SinaSsoHandler());
+				mController.setShareContent("@xuyangbill ");
+				mController.postShare(SettingActivity.this, SHARE_MEDIA.SINA,
+						new SnsPostListener() {
+							@Override
+							public void onStart() {
+
+							}
+
+							@Override
+							public void onComplete(SHARE_MEDIA platform,
+									int eCode, SocializeEntity entity) {
+								
+							}
+						});
+			}
+		});
+
+		TextView aboutView = (TextView) findViewById(R.id.about);
+		aboutView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(SettingActivity.this,
+						AboutActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.push_left_in,
+						R.anim.push_left_out);
 			}
 		});
 	}

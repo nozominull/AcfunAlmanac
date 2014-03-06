@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nozomi.almanac"
-    android:versionCode="9"
-    android:versionName="1.30" >
+    android:versionCode="10"
+    android:versionName="1.40" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -84,6 +84,12 @@
             android:theme="@style/Theme.UMDialog"
             android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>
+        <activity
+            android:name="com.nozomi.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
             android:name="com.umeng.common.net.DownloadingService"

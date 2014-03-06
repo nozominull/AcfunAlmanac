@@ -77,9 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/margin_big"
                 android:layout_marginLeft="@dimen/margin_normal"
-                android:layout_marginTop="@dimen/margin_big"
+                android:paddingBottom="@dimen/margin_big"
+                android:paddingTop="@dimen/margin_big"
                 android:text="状态栏提醒"
                 android:textColor="@color/text_normal"
                 android:textSize="@dimen/text_normal" />
@@ -155,23 +155,6 @@
         android:background="@drawable/box"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/margin_big"
-            android:paddingLeft="@dimen/margin_normal"
-            android:paddingTop="@dimen/margin_big"
-            android:text="关于我们"
-            android:textColor="@color/text_normal"
-            android:textSize="@dimen/text_normal" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider"
-            android:background="#c1c1c1"
-            android:contentDescription="@string/app_name" />
-
         <RelativeLayout
             android:id="@+id/check_update_layout"
             android:layout_width="match_parent"
@@ -198,6 +181,40 @@
                 android:textColor="@color/text_light"
                 android:textSize="@dimen/text_small" />
         </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_big"
+            android:text="意见和建议"
+            android:textColor="@color/text_normal"
+            android:textSize="@dimen/text_normal" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="#c1c1c1"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_big"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_big"
+            android:text="关于我们"
+            android:textColor="@color/text_normal"
+            android:textSize="@dimen/text_normal" />
     </LinearLayout>
 
 </RelativeLayout>

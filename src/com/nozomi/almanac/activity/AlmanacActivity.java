@@ -17,6 +17,7 @@ import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.UMSsoHandler;
+import com.umeng.socialize.media.WeiXinShareContent;
 import com.umeng.socialize.sensor.UMSensor.OnSensorListener;
 import com.umeng.socialize.sensor.UMSensor.WhitchButton;
 import com.umeng.socialize.sensor.controller.UMShakeService;
@@ -47,6 +48,8 @@ public class AlmanacActivity extends Activity {
 
 	private UMShakeService mShakeController = null;
 	private UMSocialService mController = null;
+	private UMAppAdapter appAdapter = null;
+	private ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +64,22 @@ public class AlmanacActivity extends Activity {
 		mController = UMServiceFactory.getUMSocialService("com.umeng.share",
 				RequestType.SOCIAL);
 		mController.getConfig().setSsoHandler(new SinaSsoHandler());
+		String appID = "wx4f7f32d56bb3ddb6";
+		String contentUrl = "http://www.wandoujia.com/apps/com.nozomi.almanac";
+		mController.getConfig().supportWXPlatform(this, appID, contentUrl);
+		mController.getConfig()
+				.supportWXCirclePlatform(this, appID, contentUrl);
 
 		mShakeController = UMShakeServiceFactory
 				.getShakeService("share almanac");
 
+		mShakeController.setShareContent("#Acfun黄历#");
+
+		platforms.add(SHARE_MEDIA.SINA);
+		platforms.add(SHARE_MEDIA.WEIXIN);
+		platforms.add(SHARE_MEDIA.WEIXIN_CIRCLE);
+		
+		appAdapter = new UMAppAdapter(AlmanacActivity.this);
 	}
 
 	private void initView() {
@@ -272,8 +287,6 @@ public class AlmanacActivity extends Activity {
 		}
 	};
 
-
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -292,13 +305,6 @@ public class AlmanacActivity extends Activity {
 		super.onResume();
 		MobclickAgent.onResume(this);
 
-		UMAppAdapter appAdapter = new UMAppAdapter(AlmanacActivity.this);
-		// 配置摇一摇截屏分享时用户可选的平台，最多支持五个平台
-		ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
-		platforms.add(SHARE_MEDIA.SINA);
-		// 设置摇一摇分享的文字内容
-		mShakeController.setShareContent("#Acfun黄历#");
-		// 注册摇一摇截屏分享功能,mSensorListener在2.1.2中定义
 		mShakeController.registerShakeListender(AlmanacActivity.this,
 				appAdapter, false, platforms, mSensorListener);
 
