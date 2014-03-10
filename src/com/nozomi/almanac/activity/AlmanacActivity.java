@@ -70,7 +70,7 @@ public class AlmanacActivity extends Activity {
 				.supportWXCirclePlatform(this, appID, contentUrl);
 
 		mShakeController = UMShakeServiceFactory
-				.getShakeService("share almanac");
+				.getShakeService("com.umeng.share");
 
 		mShakeController.setShareContent("#Acfun黄历#");
 
