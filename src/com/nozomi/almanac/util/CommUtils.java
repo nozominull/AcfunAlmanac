@@ -26,6 +26,7 @@ import android.widget.Toast;
 public class CommUtils {
 
 	private static Toast toast = null;
+	private static ArrayList<Integer> avatars = null;
 
 	public static void makeToast(Context context, String text) {
 		if (toast == null) {
@@ -56,9 +57,20 @@ public class CommUtils {
 		notificationManager.notify(0, notification);
 	}
 
-	public static Pair<ArrayList<TableItem>, ArrayList<TableItem>> getTableItemArray(
-			Context context) {
-		Calendar calendar = Calendar.getInstance(Locale.CHINA);
+	public static ArrayList<Integer> getAvatars(Context context) {
+		if (avatars == null) {
+			avatars = new ArrayList<Integer>();
+			for (int i = 1; i <= 54; i++) {
+				avatars.add(context.getResources().getIdentifier(
+						"ac_" + String.format("%02d", i), "drawable",
+						context.getPackageName()));
+			}
+		}
+		return avatars;
+	}
+
+	public static void getTableItemArray(Context context, Calendar calendar,
+			Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair) {
 		ArrayList<Integer> avatars = new ArrayList<Integer>();
 		for (int i = 1; i <= 50; i++) {
 			avatars.add(context.getResources().getIdentifier(
@@ -98,54 +110,48 @@ public class CommUtils {
 		list.add(new ListItem("逛街", "物美价廉大优惠", "会遇到奸商"));
 
 		long sg = rnd(seed, 8) % 100;
-		ArrayList<TableItem> goodTableItemArray = new ArrayList<TableItem>();
+		tableItemArrayPair.first.clear();
 		for (long i = 0, l = rnd(seed, 9) % 3 + 2; i < l; i++) {
 			int n = (int) (sg * 0.01 * list.size());
 			ListItem a = list.get(n);
 			int m = (int) (rnd(seed, (3 + i)) % 100 * 0.01 * avatars.size());
-			goodTableItemArray.add(new TableItem(avatars.get(m), a.getName(), a
-					.getGood()));
+			tableItemArrayPair.first.add(new TableItem(avatars.get(m), a
+					.getName(), a.getGood()));
 			list.remove(n);
 			avatars.remove(m);
 		}
 
 		long sb = rnd(seed, 4) % 100;
-		ArrayList<TableItem> badTableItemArray = new ArrayList<TableItem>();
+		tableItemArrayPair.second.clear();
 		for (long i = 0, l = rnd(seed, 7) % 3 + 2; i < l; i++) {
 			int n = (int) (sb * 0.01 * list.size());
 			ListItem a = list.get(n);
 			int m = (int) (rnd(seed, (2 + i)) % 100 * 0.01 * avatars.size());
-			badTableItemArray.add(new TableItem(avatars.get(m), a.getName(), a
-					.getBad()));
+			tableItemArrayPair.second.add(new TableItem(avatars.get(m), a
+					.getName(), a.getBad()));
 			list.remove(n);
 			avatars.remove(m);
 		}
-
-		Pair<ArrayList<TableItem>, ArrayList<TableItem>> pair = new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
-				goodTableItemArray, badTableItemArray);
-		return pair;
-
 	}
 
-	public static Pair<Long, String> getFortune(Context context) {
-		Calendar calendar = Calendar.getInstance(Locale.CHINA);
-
+	public static Pair<Long, String> getFortune(Context context,
+			Calendar calendar) {
 		long seed = calendar.get(Calendar.YEAR) * 37621
 				+ (calendar.get(Calendar.MONTH) + 1) * 539
 				+ calendar.get(Calendar.DATE);
 
-		// A站用的是uid，这里用时间戳代替
+
 		SharedPreferences sp = context.getSharedPreferences("acfun_almanac",
 				Context.MODE_PRIVATE);
-		
+		// A站用的是uid，这里用时间戳代替
 		int uid = sp.getInt(CommDef.SP_UID, 0);
 		if (uid == 0) {
 			Editor editor = sp.edit();
 			uid = (int) (System.currentTimeMillis() % 1000000);
 			editor.putInt(CommDef.SP_UID, uid);
 			editor.commit();
-		}				
-		
+		}
+		//uid = 624755;
 
 		long fortune = rnd(seed * uid, 6) % 100;
 		String fortuneLevel = "末吉";

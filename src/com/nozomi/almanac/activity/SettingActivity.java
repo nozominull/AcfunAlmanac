@@ -75,12 +75,7 @@ public class SettingActivity extends Activity {
 			}
 		});
 
-		ArrayList<Integer> avatars = new ArrayList<Integer>();
-		for (int i = 1; i <= 54; i++) {
-			avatars.add(getResources().getIdentifier(
-					"ac_" + String.format("%02d", i), "drawable",
-					getPackageName()));
-		}
+		ArrayList<Integer> avatars = CommUtils.getAvatars(this);
 		Random random = new Random();
 		ImageView avatarHeaderView = (ImageView) findViewById(R.id.avatar_header);
 		avatarHeaderView.setImageResource(avatars.get(1 + random.nextInt(50)));
@@ -192,7 +187,7 @@ public class SettingActivity extends Activity {
 							@Override
 							public void onComplete(SHARE_MEDIA platform,
 									int eCode, SocializeEntity entity) {
-								
+
 							}
 						});
 			}

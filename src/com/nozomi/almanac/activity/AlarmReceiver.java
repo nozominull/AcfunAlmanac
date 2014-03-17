@@ -1,6 +1,8 @@
 package com.nozomi.almanac.activity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import com.nozomi.almanac.model.TableItem;
 import com.nozomi.almanac.util.CommUtils;
@@ -14,13 +16,17 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-
-		Pair<Long, String> fortunePair = CommUtils.getFortune(context);
+		Calendar calendar = Calendar.getInstance(Locale.CHINA);
+		Pair<Long, String> fortunePair = CommUtils
+				.getFortune(context, calendar);
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("宜");
-		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = CommUtils
-				.getTableItemArray(context);
+
+		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
+				new ArrayList<TableItem>(), new ArrayList<TableItem>());
+
+		CommUtils.getTableItemArray(context, calendar, tableItemArrayPair);
 		boolean isFirst = true;
 		for (TableItem tableItem : tableItemArrayPair.first) {
 			if (isFirst) {

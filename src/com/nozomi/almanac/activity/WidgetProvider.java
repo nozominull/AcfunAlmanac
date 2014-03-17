@@ -44,7 +44,8 @@ public class WidgetProvider extends AppWidgetProvider {
 						+ calendar.get(Calendar.DATE) + "日 星期"
 						+ dayOfWeek[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
 
-		Pair<Long, String> fortunePair = CommUtils.getFortune(context);
+		Pair<Long, String> fortunePair = CommUtils
+				.getFortune(context, calendar);
 		rv.setTextViewText(R.id.item_sign_calendar, fortunePair.second);
 
 		rv.setTextColor(R.id.item_sign_calendar, Color.rgb(
@@ -55,8 +56,10 @@ public class WidgetProvider extends AppWidgetProvider {
 						(1 + calendar.get(Calendar.MONTH)),
 						calendar.get(Calendar.DATE)));
 
-		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = CommUtils
-				.getTableItemArray(context);
+		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
+				new ArrayList<TableItem>(), new ArrayList<TableItem>());
+
+		CommUtils.getTableItemArray(context, calendar, tableItemArrayPair);
 		ArrayList<TableItem> goodTableItemArray = tableItemArrayPair.first;
 		rv.removeAllViews(R.id.good_right);
 		for (int i = 0; i < goodTableItemArray.size(); i++) {
@@ -82,8 +85,9 @@ public class WidgetProvider extends AppWidgetProvider {
 			tableItemView.setTextViewText(R.id.content, tableItem.getContent());
 			rv.addView(R.id.bad_right, tableItemView);
 		}
-		Intent intent = new Intent(context,SplashActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0); 
+		Intent intent = new Intent(context, SplashActivity.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+				intent, 0);
 		rv.setOnClickPendingIntent(R.id.background, pendingIntent);
 		appWidgeManger.updateAppWidget(appWidgetId, rv);
 	}

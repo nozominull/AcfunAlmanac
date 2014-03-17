@@ -26,6 +26,8 @@ import com.umeng.update.UmengUpdateAgent;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,6 +40,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,17 +48,28 @@ import android.widget.TextView;
 
 public class AlmanacActivity extends Activity {
 
+	private TextView itemDateCalendarView = null;
+	private TextView itemSubdateCalendarView = null;
+	private TextView itemSignCalendarView = null;
+
 	private UMShakeService mShakeController = null;
 	private UMSocialService mController = null;
 	private UMAppAdapter appAdapter = null;
 	private ArrayList<SHARE_MEDIA> platforms = new ArrayList<SHARE_MEDIA>();
+	private Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = new Pair<ArrayList<TableItem>, ArrayList<TableItem>>(
+			new ArrayList<TableItem>(), new ArrayList<TableItem>());
+	private TableItemAdapter goodTableItemAdapter = null;
+	private TableItemAdapter badTableItemAdapter = null;
+	private Calendar calendar = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.almanac_activity);
 
+		calendar = Calendar.getInstance(Locale.CHINA);
 		initView();
+		updateView();
 
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
@@ -77,7 +91,7 @@ public class AlmanacActivity extends Activity {
 		platforms.add(SHARE_MEDIA.SINA);
 		platforms.add(SHARE_MEDIA.WEIXIN);
 		platforms.add(SHARE_MEDIA.WEIXIN_CIRCLE);
-		
+
 		appAdapter = new UMAppAdapter(AlmanacActivity.this);
 	}
 
@@ -100,12 +114,7 @@ public class AlmanacActivity extends Activity {
 			}
 		});
 
-		ArrayList<Integer> avatars = new ArrayList<Integer>();
-		for (int i = 1; i <= 54; i++) {
-			avatars.add(getResources().getIdentifier(
-					"ac_" + String.format("%02d", i), "drawable",
-					getPackageName()));
-		}
+		ArrayList<Integer> avatars = CommUtils.getAvatars(this);
 		Random random = new Random();
 		ImageView avatarHeaderView = (ImageView) findViewById(R.id.avatar_header);
 		avatarHeaderView.setImageResource(avatars.get(1 + random.nextInt(50)));
@@ -123,46 +132,40 @@ public class AlmanacActivity extends Activity {
 			}
 		});
 
-		Calendar calendar = Calendar.getInstance(Locale.CHINA);
-		String[] dayOfWeek = { "日", "一", "二", "三", "四", "五", "六" };
-
-		TextView itemDateCalendarView = (TextView) findViewById(R.id.item_date_calendar);
-		itemDateCalendarView.setText(calendar.get(Calendar.YEAR) + "年"
-				+ (1 + calendar.get(Calendar.MONTH)) + "月"
-				+ calendar.get(Calendar.DATE) + "日 星期"
-				+ dayOfWeek[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
-
-		TextView itemSignCalendarView = (TextView) findViewById(R.id.item_sign_calendar);
-		final Pair<Long, String> fortunePair = CommUtils.getFortune(this);
-
-		itemSignCalendarView.setText(fortunePair.second);
-		itemSignCalendarView.setTextColor(Color.rgb(
-				(int) (255 * (10 + fortunePair.first * 0.8) / 100), 51, 51));
-		itemSignCalendarView.setOnClickListener(new OnClickListener() {
+		itemDateCalendarView = (TextView) findViewById(R.id.item_date_calendar);
+		itemDateCalendarView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				CommUtils.makeToast(AlmanacActivity.this, "今日运势指数："
-						+ fortunePair.first + "%");
+
+				new DatePickerDialog(AlmanacActivity.this,
+						new OnDateSetListener() {
+
+							@Override
+							public void onDateSet(DatePicker view, int year,
+									int monthOfYear, int dayOfMonth) {
+								calendar.set(Calendar.YEAR, year);
+								calendar.set(Calendar.MONTH, monthOfYear);
+								calendar.set(Calendar.DATE, dayOfMonth);
+								updateView();
+							}
+						}, calendar.get(Calendar.YEAR), calendar
+								.get(Calendar.MONTH), calendar
+								.get(Calendar.DATE)).show();
 			}
 		});
 
-		TextView itemSubdateCalendarView = (TextView) findViewById(R.id.item_subdate_calendar);
-		itemSubdateCalendarView
-				.setText(LunarUtil.GetLunarDay(calendar.get(Calendar.YEAR),
-						(1 + calendar.get(Calendar.MONTH)),
-						calendar.get(Calendar.DATE)));
+		itemSignCalendarView = (TextView) findViewById(R.id.item_sign_calendar);
 
-		Pair<ArrayList<TableItem>, ArrayList<TableItem>> tableItemArrayPair = CommUtils
-				.getTableItemArray(this);
+		itemSubdateCalendarView = (TextView) findViewById(R.id.item_subdate_calendar);
 
 		ListView goodRightView = (ListView) findViewById(R.id.good_right);
-		TableItemAdapter goodTableItemAdapter = new TableItemAdapter(this,
+		goodTableItemAdapter = new TableItemAdapter(this,
 				tableItemArrayPair.first);
 		goodRightView.setAdapter(goodTableItemAdapter);
 
 		ListView badRightView = (ListView) findViewById(R.id.bad_right);
-		TableItemAdapter badTableItemAdapter = new TableItemAdapter(this,
+		badTableItemAdapter = new TableItemAdapter(this,
 				tableItemArrayPair.second);
 		badRightView.setAdapter(badTableItemAdapter);
 
@@ -182,7 +185,37 @@ public class AlmanacActivity extends Activity {
 				CommUtils.makeToast(AlmanacActivity.this, "摇一摇");
 			}
 		});
+	}
 
+	private void updateView() {
+		String[] dayOfWeek = { "日", "一", "二", "三", "四", "五", "六" };
+		itemDateCalendarView.setText(calendar.get(Calendar.YEAR) + "年"
+				+ (1 + calendar.get(Calendar.MONTH)) + "月"
+				+ calendar.get(Calendar.DATE) + "日 星期"
+				+ dayOfWeek[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
+
+		itemSubdateCalendarView
+				.setText(LunarUtil.GetLunarDay(calendar.get(Calendar.YEAR),
+						(1 + calendar.get(Calendar.MONTH)),
+						calendar.get(Calendar.DATE)));
+
+		final Pair<Long, String> fortunePair = CommUtils.getFortune(this,
+				calendar);
+		itemSignCalendarView.setText(fortunePair.second);
+		itemSignCalendarView.setTextColor(Color.rgb(
+				(int) (255 * (10 + fortunePair.first * 0.8) / 100), 51, 51));
+		itemSignCalendarView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				CommUtils.makeToast(AlmanacActivity.this, "运势指数："
+						+ fortunePair.first + "%");
+			}
+		});
+
+		CommUtils.getTableItemArray(this, calendar, tableItemArrayPair);
+		goodTableItemAdapter.notifyDataSetChanged();
+		badTableItemAdapter.notifyDataSetChanged();
 	}
 
 	private class TableItemAdapter extends BaseAdapter {
