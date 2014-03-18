@@ -12,6 +12,7 @@ import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.UMSsoHandler;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
@@ -39,7 +40,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 public class SettingActivity extends Activity {
 
 	private TextView notificationTimeView;
-
+	private UMSocialService mController = null;
 	private SharedPreferences sp;
 	private Editor editor;
 	private boolean notificationState;
@@ -52,6 +53,10 @@ public class SettingActivity extends Activity {
 
 		sp = getSharedPreferences("acfun_almanac", Context.MODE_PRIVATE);
 		editor = sp.edit();
+
+		mController = UMServiceFactory.getUMSocialService("com.umeng.share",
+				RequestType.SOCIAL);
+		mController.getConfig().setSsoHandler(new SinaSsoHandler());
 
 		initView();
 	}
@@ -172,10 +177,7 @@ public class SettingActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				UMSocialService mController = UMServiceFactory
-						.getUMSocialService("com.umeng.share",
-								RequestType.SOCIAL);
-				mController.getConfig().setSsoHandler(new SinaSsoHandler());
+
 				mController.setShareContent("@xuyangbill ");
 				mController.postShare(SettingActivity.this, SHARE_MEDIA.SINA,
 						new SnsPostListener() {
@@ -241,6 +243,18 @@ public class SettingActivity extends Activity {
 			}
 
 		}, hourOfDay, minute, true).show();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/** 使用SSO授权必须添加如下代码 */
+
+		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
+				requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
 	}
 
 	@Override

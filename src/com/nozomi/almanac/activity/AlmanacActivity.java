@@ -329,7 +329,6 @@ public class AlmanacActivity extends Activity {
 		if (ssoHandler != null) {
 			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
-
 	}
 
 	@Override
